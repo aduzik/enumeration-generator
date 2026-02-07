@@ -18,7 +18,7 @@ public class AnalyzerTests
                     ("""
                        using AlexDuzik.EnumerationGenerator;
                        
-                       [Enumeration]
+                       [Enumeration("TestData.csv")]
                        public class NonPartialClass 
                        {
                        }

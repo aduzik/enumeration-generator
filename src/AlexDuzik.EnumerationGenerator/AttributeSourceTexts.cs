@@ -29,7 +29,7 @@ internal static class AttributeSourceTexts
         namespace AlexDuzik.EnumerationGenerator
         {
             [System.AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false, Inherited = false), Embedded]
-            public class EnumerationAttribute : Attribute
+            public class EnumerationAttribute(string sourceFile) : Attribute
             {
                 
             }

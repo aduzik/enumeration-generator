@@ -41,7 +41,7 @@ public class AttributeTests
 
                     namespace TestProject;
 
-                    [Enumeration]
+                    [Enumeration("TestFile.csv")]
                     public partial class EnumerationType 
                     {
                     }
@@ -56,6 +56,7 @@ public class AttributeTests
                           {
                               partial class EnumerationType
                               {
+                                  // Enumeration for file 'TestFile.csv'
                               }
                           }
                           """)

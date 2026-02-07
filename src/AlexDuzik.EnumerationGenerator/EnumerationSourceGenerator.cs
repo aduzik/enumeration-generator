@@ -32,6 +32,9 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
                          !string.IsNullOrEmpty(declarationSyntax.Identifier.Text),
             (nodeContext, _) =>
             {
+                var attribute = nodeContext.Attributes.Single();
+                var fileName = (string)attribute.ConstructorArguments[0].Value!;
+
                 var declaration = (INamedTypeSymbol)nodeContext.TargetSymbol;
                 var typeNamespace = declaration.ContainingNamespace.ToDisplayString(
                     SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle
@@ -41,12 +44,12 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
                 var syntax = (BaseTypeDeclarationSyntax)nodeContext.TargetNode;
                 var kind = syntax.Kind();
 
-                return new EnumerationData(typeNamespace, typeName, kind);
+                return new EnumerationData(typeNamespace, typeName, kind, fileName);
             });
 
         context.RegisterSourceOutput(pipeline, (productionContext, data) =>
         {
-            (string fullyQualifiedNamespace, string typeName, SyntaxKind kind) = data;
+            (string fullyQualifiedNamespace, string typeName, SyntaxKind kind, string fileName) = data;
 
             var kindSyntax = kind switch
             {
@@ -69,6 +72,7 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
                 {
                     partial {{kindSyntax}} {{typeName}}
                     {
+                        // Enumeration for file '{{fileName}}'
                     }
                 }
                 """, Encoding.UTF8);
@@ -77,5 +81,5 @@ public class EnumerationSourceGenerator : IIncrementalGenerator
         });
     }
 
-    private record EnumerationData(string FullyQualifiedNamespace, string TypeName, SyntaxKind Kind);
+    private record EnumerationData(string FullyQualifiedNamespace, string TypeName, SyntaxKind Kind, string FileName);
 }
