@@ -5,4 +5,5 @@
 
 Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
-GE1001 | EnumerationGenerator | Error | DiagnosticDescriptors
+GE1001 | Usage | Error | DiagnosticDescriptors
+GE1002 | Usage | Error | DiagnosticDescriptors
