@@ -23,7 +23,6 @@ public class AttributeTests
                     }
                     """
                 },
-                GeneratedSources = { AnalyzerSources.EmbeddedAttribute, AnalyzerSources.EnumerationAttribute },
             },
         }.RunAsync(cancellationToken);
     }
@@ -50,8 +49,6 @@ public class AttributeTests
                 },
                 GeneratedSources =
                 {
-                    AnalyzerSources.EmbeddedAttribute,
-                    AnalyzerSources.EnumerationAttribute,
                     (typeof(EnumerationSourceGenerator),
                         "TestProject.EnumerationType_EnumerationClass.g.cs",
                         $$"""
