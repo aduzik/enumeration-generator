@@ -1,7 +1,4 @@
-using System.Text;
 using System.Text.RegularExpressions;
-
-using Microsoft.CodeAnalysis.Text;
 
 namespace AlexDuzik.EnumerationGenerator.Tests.SourceGenerator;
 

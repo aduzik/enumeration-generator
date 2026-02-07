@@ -22,6 +22,11 @@ indent_size = 2
 # C# files
 [*.cs]
 
+# noinspection EditorConfigKeyCorrectness
+dotnet_diagnostic.IDE0005.severity = warning
+resharper_redundant_using_directive_highlighting = warning
+resharper_redundant_using_directive_global_highlighting = warning
+
 #### Core EditorConfig Options ####
 
 # Indentation and spacing

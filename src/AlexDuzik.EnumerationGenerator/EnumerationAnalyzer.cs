@@ -9,9 +9,13 @@ using static AlexDuzik.EnumerationGenerator.DiagnosticDescriptors;
 
 namespace AlexDuzik.EnumerationGenerator;
 
+/// <summary>
+/// A Roslyn analyzer that enforces correct usage of the Enumeration attribute.
+/// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class EnumerationAnalyzer : DiagnosticAnalyzer
 {
+    /// <inheritdoc/>
     public override void Initialize(AnalysisContext context)
     {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
@@ -45,6 +49,7 @@ public class EnumerationAnalyzer : DiagnosticAnalyzer
         }, SymbolKind.NamedType);
     }
 
+    /// <inheritdoc />
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
     [
         TypesMustBePartial

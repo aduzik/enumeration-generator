@@ -13,12 +13,5 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
     <InternalsVisibleTo Include="AlexDuzik.EnumerationGenerator.Tests" />
   </ItemGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Include="AnalyzerReleases.Shipped.md" />
-    <AdditionalFiles Include="AnalyzerReleases.Unshipped.md" />
-    <None Remove="AnalyzerReleases.Shipped.md" />
-    <None Remove="AnalyzerReleases.Unshipped.md" />
-  </ItemGroup>
-
+  
 </Project>
