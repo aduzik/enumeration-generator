@@ -23,11 +23,46 @@ public class AttributeTests
                     }
                     """
                 },
+                GeneratedSources = { AnalyzerSources.EmbeddedAttribute, AnalyzerSources.EnumerationAttribute },
+            },
+        }.RunAsync(cancellationToken);
+    }
+
+    [Test]
+    public async Task EnumerationAttribute_CausesPartialClassToBeEmitted(CancellationToken cancellationToken)
+    {
+        await new GeneratorTest.Test
+        {
+            TestState =
+            {
+                Sources =
+                {
+                    """
+                    using AlexDuzik.EnumerationGenerator;
+
+                    namespace TestProject;
+
+                    [Enumeration]
+                    public partial class EnumerationType 
+                    {
+                    }
+                    """
+                },
                 GeneratedSources =
                 {
                     AnalyzerSources.EmbeddedAttribute,
-                    AnalyzerSources.EnumerationAttribute
-                },
+                    AnalyzerSources.EnumerationAttribute,
+                    (typeof(EnumerationSourceGenerator),
+                        "TestProject.EnumerationType_EnumerationClass.g.cs",
+                        $$"""
+                          namespace TestProject
+                          {
+                              partial class EnumerationType
+                              {
+                              }
+                          }
+                          """)
+                }
             },
         }.RunAsync(cancellationToken);
     }

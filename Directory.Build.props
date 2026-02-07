@@ -3,5 +3,6 @@
     <UseArtifactsOutput>true</UseArtifactsOutput>
     <AnalysisMode>Recommended</AnalysisMode>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 </Project>
