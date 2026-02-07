@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.RegularExpressions;
+
 using Microsoft.CodeAnalysis.Text;
 
 namespace AlexDuzik.EnumerationGenerator.Tests.SourceGenerator;
@@ -24,13 +25,13 @@ public class AttributeTests
                         // Do nothing
                     }
                     """
-                }, 
+                },
                 GeneratedSources =
                 {
                     AnalyzerSources.EmbeddedAttribute,
                     AnalyzerSources.EnumerationAttribute
                 },
-            }, 
+            },
         }.RunAsync(cancellationToken);
     }
 }

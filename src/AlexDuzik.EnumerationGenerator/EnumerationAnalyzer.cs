@@ -1,8 +1,10 @@
 using System.Collections.Immutable;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+
 using static AlexDuzik.EnumerationGenerator.DiagnosticDescriptors;
 
 namespace AlexDuzik.EnumerationGenerator;
@@ -14,11 +16,11 @@ public class EnumerationAnalyzer : DiagnosticAnalyzer
     {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
         context.EnableConcurrentExecution();
-        
+
         context.RegisterSymbolAction(symbolContext =>
         {
             var namedType = (INamedTypeSymbol)symbolContext.Symbol;
-            
+
             var attributes = namedType.GetAttributes();
             foreach (var attribute in attributes)
             {
@@ -26,21 +28,21 @@ public class EnumerationAnalyzer : DiagnosticAnalyzer
                 {
                     var attributeSyntax = (AttributeSyntax?)attribute.ApplicationSyntaxReference?.GetSyntax();
                     var attributeList = (AttributeListSyntax?)attributeSyntax?.Parent;
-                    var syntaxNode  =  (TypeDeclarationSyntax?)attributeList?.Parent;
+                    var syntaxNode = (TypeDeclarationSyntax?)attributeList?.Parent;
                     if (syntaxNode != null)
                     {
                         if (syntaxNode.Modifiers.All(modifier => !modifier.IsKind(SyntaxKind.PartialKeyword)))
                         {
                             symbolContext.ReportDiagnostic(
                                 Diagnostic.Create(
-                                    TypesMustBePartial, 
-                                    syntaxNode.Identifier.GetLocation(), 
+                                    TypesMustBePartial,
+                                    syntaxNode.Identifier.GetLocation(),
                                     syntaxNode.Identifier.ValueText));
                         }
                     }
                 }
             }
-        },  SymbolKind.NamedType);
+        }, SymbolKind.NamedType);
     }
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>

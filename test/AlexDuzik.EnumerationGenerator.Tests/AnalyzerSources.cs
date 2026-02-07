@@ -9,7 +9,7 @@ public static partial class AnalyzerSources
         Constants.EmbeddedAttributeFileName,
         AttributeSourceTexts.EmbeddedAttribute);
 
-    
+
     public static readonly (Type type, string fileName, SourceText source) EnumerationAttribute = (
         typeof(EnumerationSourceGenerator), Constants.EnumerationAttributeFileName,
         AttributeSourceTexts.EnumerationAttribute);
