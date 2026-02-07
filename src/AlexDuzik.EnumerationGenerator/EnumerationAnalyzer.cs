@@ -3,20 +3,13 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using static AlexDuzik.EnumerationGenerator.DiagnosticDescriptors;
 
 namespace AlexDuzik.EnumerationGenerator;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class EnumerationAnalyzer : DiagnosticAnalyzer
 {
-    private static readonly DiagnosticDescriptor TypesMustBePartial = new(
-        "GE1001",
-        "Enumeration type class must be partial",
-        "The type '{0}' must be a partial",
-        "EnumerationGenerator",
-        DiagnosticSeverity.Error,
-        isEnabledByDefault: true);
-    
     public override void Initialize(AnalysisContext context)
     {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);

@@ -8,10 +8,5 @@ namespace AlexDuzik.EnumerationGenerator.Tests;
 public static class CSharpSourceGeneratorVerifier<TSourceGenerator>
     where TSourceGenerator : IIncrementalGenerator, new()
 {
-    public class Test : CSharpSourceGeneratorTest<TSourceGenerator, DefaultVerifier>
-    {
-        public Test()
-        {
-        }
-    }
+    public class Test : CSharpSourceGeneratorTest<TSourceGenerator, DefaultVerifier>;
 }

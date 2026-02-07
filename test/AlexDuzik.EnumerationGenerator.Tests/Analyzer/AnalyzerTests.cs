@@ -1,9 +1,6 @@
-
-
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 
-namespace AlexDuzik.EnumerationGenerator.Tests;
+namespace AlexDuzik.EnumerationGenerator.Tests.Analyzer;
 
 using Verify = Microsoft.CodeAnalysis.CSharp.Testing.CSharpAnalyzerTest<EnumerationAnalyzer, DefaultVerifier>;
 
@@ -26,22 +23,16 @@ public class AnalyzerTests
                        {
                        }
                        """),
-                    AttributeSources.EmbeddedAttribute,
-                    (typeof(EnumerationSourceGenerator), 
-                        "EnumerationAttribute.g.cs",
-                        EnumerationSourceGenerator.EnumerationAttributeText)
+                    AnalyzerSources.EmbeddedAttribute,
+                    AnalyzerSources.EnumerationAttribute,
 
                 },
             },
             ExpectedDiagnostics =
             {
-                new DiagnosticResult(new(
-                    "GE1001",
-                    "Enumeration type class must be partial",
-                    "The type '{0}' must be a partial",
-                    "EnumerationGenerator",
-                    DiagnosticSeverity.Error,
-                    isEnabledByDefault: true)).WithArguments("NonPartialClass").WithSpan(4, 14, 4, 29),
+                new DiagnosticResult(DiagnosticDescriptors.TypesMustBePartial)
+                    .WithArguments("NonPartialClass")
+                    .WithSpan(4, 14, 4, 29),
             }
         }.RunAsync(cancellationToken);
     }
